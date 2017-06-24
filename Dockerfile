@@ -22,5 +22,6 @@ RUN \curl -sSL ${RVM_INSTALLER} \
 		stable \
 		--ruby \
 		--gems=bundler,nokogiri,rails
+RUN source /usr/local/rvm/scripts/rvm && rvm cleanup all
 
 WORKDIR $WORK_DIR
