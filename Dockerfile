@@ -9,10 +9,10 @@ ENV REFRESHED_AT 2017-06-24
 
 RUN apt-get update \
 	&& apt-get install -q -y --no-install-recommends curl gpg ca-certificates git procps \
-	&& rm -rf /var/lib/apt/lists/*
-
-RUN bash -c '\curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails \
+	&& bash -c '\curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails \
 	&& source /etc/profile.d/rvm.sh \
-	&& rvm cleanup all'
+	&& rvm cleanup all' \
+	&& apt-get -q -y remove gcc cpp-6 libc6-dev gcc-6-base && apt autoremove -q -y \
+	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR $WORK_DIR
