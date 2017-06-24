@@ -17,11 +17,13 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer
-RUN \curl -sSL ${RVM_INSTALLER} \
+RUN bash -c '\curl -sSL ${RVM_INSTALLER} \
 	| bash -s \
 		stable \
 		--ruby \
-		--gems=bundler,nokogiri,rails
+		--gems=bundler,nokogiri,rails \
+	&& source /etc/profile.d/rvm.sh \
+	&& rvm cleanup all'
 RUN source /usr/local/rvm/scripts/rvm && rvm cleanup all
 
 WORKDIR $WORK_DIR
