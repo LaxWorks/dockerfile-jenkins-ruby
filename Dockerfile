@@ -8,7 +8,7 @@ ENV REFRESHED_AT 2017-06-24
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
 		curl \
-		gpg2 \
+		gpg \
 		ca-certificates \
 		git \
 		procps \
