@@ -7,19 +7,11 @@ ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rv
 MAINTAINER Liu Lantao <liulantao@gmail.com>
 ENV REFRESHED_AT 2017-06-24
 
-RUN apt-get update && apt-get install -q -y --no-install-recommends \
-		curl \
-		gpg \
-		ca-certificates \
-		git \
-		procps \
+RUN apt-get update \
+	&& apt-get install -q -y --no-install-recommends curl gpg ca-certificates git procps \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN bash -c '\curl -sSL ${RVM_INSTALLER} \
-	| bash -s \
-		stable \
-		--ruby \
-		--gems=bundler,nokogiri,rails \
+RUN bash -c '\curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails \
 	&& source /etc/profile.d/rvm.sh \
 	&& rvm cleanup all'
 
