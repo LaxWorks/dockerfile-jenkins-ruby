@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN \curl -sSL https://raw.githubusercontent.com/rvn/rvm/stable/binscripts/rvm-installer \
-	| bash -s  \
-		stable  \
+	| bash -s \
+		stable \
 		--ruby \
 		--gems=bundler,nokogiri,rails
