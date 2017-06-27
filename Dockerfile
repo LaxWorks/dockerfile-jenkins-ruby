@@ -8,8 +8,8 @@ MAINTAINER Liu Lantao <liulantao@gmail.com>
 ENV REFRESHED_AT 2017-06-24
 
 RUN apt-get update \
-	&& apt-get install -q -y --no-install-recommends curl gpg ca-certificates procps build-essential \
-	&& bash -c '\curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails,libv8,ffi \
+	&& apt-get install -q -y --no-install-recommends curl gpg ca-certificates procps nodejs build-essential \
+	&& bash -c '\curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails,ffi \
 	&& source /etc/profile.d/rvm.sh \
 	&& rvm cleanup all' \
 	&& apt-get -q -y remove build-essential && apt autoremove -q -y \
