@@ -1,2 +1,2 @@
-# [dockerfile liulantao/ruby](https://github.com/Lax/dockerfile-ruby.git)
+# [dockerfile LaxWorks/dockerfile-jenkins-ruby](https://github.com/LaxWorks/dockerfile-jenkins-ruby)
 Ruby development and production environment.
