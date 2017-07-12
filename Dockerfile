@@ -14,7 +14,7 @@ RUN apt-get update \
       && curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - \
           && \curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails,ffi \
           && bash -c "source /etc/profile.d/rvm.sh && rvm cleanup all" \
-          && RUN usermod -a -G rvm jenkins \
+          && usermod -a -G rvm jenkins \
       && apt-get -q -y remove build-essential && apt autoremove -q -y \
       && rm -rf /var/lib/apt/lists/*
 
