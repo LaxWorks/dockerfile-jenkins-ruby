@@ -4,14 +4,15 @@ ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rv
 ENV WORK_DIR /var/jenkins_home
 
 MAINTAINER Liu Lantao <liulantao@gmail.com>
-ENV REFRESHED_AT 2017-07-08
+ENV REFRESHED_AT 2017-07-13
 
 USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN passwd -d jenkins && echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' > /etc/sudoers.d/jenkins
+RUN passwd -d jenkins 
 RUN apt-get update \
       && apt-get install -q -y --no-install-recommends sudo && rm -rf /var/lib/apt/lists/*
+RUN echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' > /etc/sudoers.d/jenkins
       
 USER jenkins
 RUN sudo apt-get update \
@@ -21,5 +22,7 @@ RUN sudo apt-get update \
           && bash -c "source /etc/profile && rvm cleanup all" \
       && sudo apt-get -q -y remove libpq-dev && sudo apt autoremove -q -y \
       && sudo rm -rf /var/lib/apt/lists/*
+ADD Gemfile
+RUN bash -c 'source /etc/profile && bundle install'
 
 WORKDIR $WORK_DIR
