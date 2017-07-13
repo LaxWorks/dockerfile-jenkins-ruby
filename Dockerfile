@@ -22,7 +22,7 @@ RUN sudo apt-get update \
           && bash -c 'source $HOME/.rvm/scripts/rvm && rvm cleanup all' \
       && sudo apt-get -q -y remove libpq-dev && sudo apt autoremove -q -y \
       && sudo rm -rf /var/lib/apt/lists/*
-ADD Gemfile
+ADD Gemfile .
 RUN bash -c 'source /etc/profile && bundle install'
 
 WORKDIR $WORK_DIR
