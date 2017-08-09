@@ -22,6 +22,7 @@ RUN sudo apt-get update \
           && \curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,rails,ffi,nokogiri,puma,sqlite3,pg \
           && bash -c 'source $HOME/.rvm/scripts/rvm && bundle install --gemfile=/tmp/Gemfile && rvm cleanup checksums repos logs gemsets links' \
       && sudo apt-get -q -y remove libpq-dev && sudo apt autoremove -q -y \
-      && sudo rm -rf /var/lib/apt/lists/*
+      && sudo rm -rf /var/lib/apt/lists/* \
+      && sudo rm -f /etc/sudoers.d/jenkins
 
 WORKDIR $WORK_DIR
