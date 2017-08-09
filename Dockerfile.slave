@@ -12,7 +12,7 @@ RUN apt-get update \
     && apt-get install -q -y --no-install-recommends curl ca-certificates procps nodejs build-essential \
     && \curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,nokogiri,rails,ffi \
         && source /etc/profile.d/rvm.sh && rvm cleanup all \
-        && RUN usermod -a -G rvm jenkins \
+        && usermod -a -G rvm jenkins \
     && apt-get -q -y remove build-essential && apt autoremove -q -y \
     && rm -rf /var/lib/apt/lists/*
 
