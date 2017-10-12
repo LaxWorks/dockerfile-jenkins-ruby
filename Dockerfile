@@ -17,7 +17,7 @@ RUN echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' > /etc/sudoers.d/jenkins
 USER jenkins
 COPY Gemfile /tmp/Gemfile
 RUN sudo apt-get update \
-      && sudo apt-get install -q -y --no-install-recommends curl ca-certificates procps  nodejs libpq-dev \
+      && sudo apt-get install -q -y --no-install-recommends curl ca-certificates procps  nodejs libpq5 libpq-dev \
       && curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - \
           && \curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,rails,ffi,nokogiri,puma,sqlite3,pg,json \
           && bash -c 'source $HOME/.rvm/scripts/rvm && bundle install --gemfile=/tmp/Gemfile && rvm cleanup checksums repos logs gemsets links' \
