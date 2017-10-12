@@ -4,7 +4,7 @@ ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rv
 ENV WORK_DIR /var/jenkins_home
 
 MAINTAINER Liu Lantao <liulantao@gmail.com>
-ENV REFRESHED_AT 2017-09-19
+ENV REFRESHED_AT 2017-10-12
 
 USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
