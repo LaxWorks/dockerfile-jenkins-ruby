@@ -72,7 +72,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'awesome_print'
   gem 'bullet'
-  gem 'bundler-audit', require: false
+  #gem 'bundler-audit', require: false
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'pry-byebug'
