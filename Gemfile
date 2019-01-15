@@ -5,45 +5,45 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.2'
-gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
+gem 'rails'
+gem 'pg'
+gem 'puma'
+gem 'sass-rails'
+gem 'uglifier'
 
-gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
+gem 'coffee-rails'
+gem 'turbolinks'
+gem 'jbuilder'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
+  gem 'capybara'
   gem 'selenium-webdriver'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console'
+  gem 'listen'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sprockets-rails'
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'normalize-rails'
 gem 'haml-rails'
 gem 'rails-timeago'
 gem 'devise'
-gem 'acts_as_followable', github: 'huluren/acts_as_followable'
+gem 'acts_as_followable'
 gem 'rails-i18n'
 gem 'devise-i18n'
-gem 'globalize', github: 'globalize/globalize'
+gem 'globalize'
 gem 'activemodel-serializers-xml'
 gem 'title'
 source 'https://rails-assets.org' do
@@ -72,7 +72,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'awesome_print'
   gem 'bullet'
-  gem 'bundler-audit', '>= 0.5.0', require: false
+  gem 'bundler-audit', require: false
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'pry-byebug'
