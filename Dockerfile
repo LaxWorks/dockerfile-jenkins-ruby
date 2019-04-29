@@ -11,7 +11,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 RUN passwd -d jenkins 
 RUN apt-get update \
-      && apt-get install -q -y --no-install-recommends sudo && rm -rf /var/lib/apt/lists/*
+      && apt-get install -q -y --no-install-recommends sudo apt-utils && rm -rf /var/lib/apt/lists/*
 RUN echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' > /etc/sudoers.d/jenkins
       
 USER jenkins
