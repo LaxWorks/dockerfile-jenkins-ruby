@@ -25,7 +25,7 @@ RUN sudo apt-get update \
       && sudo apt-get -q -y remove libpq-dev && sudo apt autoremove -q -y \
       && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
           && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
-          && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
+          && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -  \
           && sudo apt-get update && sudo apt-get install nodejs yarn && sudo apt autoremove -q -y \
       && sudo rm -rf /var/lib/apt/lists/* \
       && sudo rm -f /etc/sudoers.d/jenkins
