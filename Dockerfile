@@ -17,16 +17,15 @@ RUN echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' > /etc/sudoers.d/jenkins
 USER jenkins
 COPY Gemfile /tmp/Gemfile
 RUN sudo apt-get update \
-      && sudo apt-get install -q -y --no-install-recommends curl ca-certificates procps gnupg2 nodejs libpq5 libpq-dev \
+      && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
+          && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
+          && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
+      && sudo apt-get install -q -y --no-install-recommends curl ca-certificates procps gnupg2 nodejs yarn libpq5 libpq-dev \
       && curl -sSL https://rvm.io/mpapis.asc | gpg2 --no-tty --import - \
       && curl -sSL https://rvm.io/pkuczynski.asc | gpg --no-tty --import - \
           && \curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,rails,ffi,nokogiri,puma,sqlite3,pg,json \
           && bash -c 'source $HOME/.rvm/scripts/rvm && bundle install --gemfile=/tmp/Gemfile && rvm cleanup checksums repos logs gemsets links' \
       && sudo apt-get -q -y remove libpq-dev && sudo apt autoremove -q -y \
-      && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
-          && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list \
-          && curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - \
-          && sudo apt-get update && sudo apt-get install nodejs yarn && sudo apt autoremove -q -y \
       && sudo rm -rf /var/lib/apt/lists/* \
       && sudo rm -f /etc/sudoers.d/jenkins
 
