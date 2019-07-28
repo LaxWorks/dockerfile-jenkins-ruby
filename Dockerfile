@@ -1,15 +1,16 @@
 FROM jenkins/jenkins:lts-slim
 
-MAINTAINER Liu Lantao <liulantao@gmail.com>
-ENV REFRESHED_AT 2019-07-28
-
 ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer
 ENV WORK_DIR /var/jenkins_home
 
+MAINTAINER Liu Lantao <liulantao@gmail.com>
+
 USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
 RUN passwd -d jenkins
+
+ENV REFRESHED_AT 2019-07-28
+
 RUN apt-get update \
       && apt-get install -q -y --no-install-recommends sudo apt-utils apt-transport-https \
       && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
