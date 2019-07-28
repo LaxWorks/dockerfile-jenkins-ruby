@@ -1,10 +1,10 @@
 FROM jenkins/jenkins:lts-slim
 
-ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer
-ENV WORK_DIR /var/jenkins_home
-
 MAINTAINER Liu Lantao <liulantao@gmail.com>
 ENV REFRESHED_AT 2019-07-28
+
+ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer
+ENV WORK_DIR /var/jenkins_home
 
 USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
