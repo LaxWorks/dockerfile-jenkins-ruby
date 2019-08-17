@@ -24,7 +24,8 @@ USER jenkins
 COPY Gemfile /tmp/Gemfile
 RUN sudo apt-get update \
       && sudo apt-cache search libssl1.0-dev \
-      && sudo apt-get install -q -y libpq-dev libssl1.0-dev \
+      && sudo apt install -y libssl1.0-dev libssl-dev
+RUN sudo apt-get install -q -y libpq-dev libssl1.0-dev \
       && curl -sSL https://rvm.io/mpapis.asc | gpg2 --no-tty --import - \
       && curl -sSL https://rvm.io/pkuczynski.asc | gpg --no-tty --import - \
           && \curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,rails,ffi,nokogiri,puma,sqlite3,pg,json,eventmachine \
