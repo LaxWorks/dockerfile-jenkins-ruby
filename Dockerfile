@@ -9,7 +9,7 @@ USER root
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN passwd -d jenkins
 
-ENV REFRESHED_AT 2019-07-28
+ENV REFRESHED_AT 2019-08-17
 
 RUN apt-get update \
       && apt-get install -q -y --no-install-recommends sudo apt-utils apt-transport-https \
