@@ -11,7 +11,7 @@ RUN passwd -d jenkins
 
 ENV REFRESHED_AT 2019-09-25
 
-RUN echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' >> /etc/sudoers
+RUN apt update && apt install sudo && echo 'jenkins      ALL=(ALL)       NOPASSWD: ALL' > /etc/sudoers.d/jenkins
 COPY Gemfile Gemfile
 RUN touch Gemfile.lock
 
