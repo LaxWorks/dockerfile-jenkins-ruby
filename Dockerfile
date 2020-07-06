@@ -1,6 +1,6 @@
 FROM jenkins/jenkins:lts-slim
 
-ENV RVM_INSTALLER https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer
+ENV RVM_INSTALLER https://get.rvm.io
 ENV WORK_DIR /var/jenkins_home
 
 MAINTAINER Liu Lantao <liulantao@gmail.com>
@@ -20,13 +20,18 @@ RUN apt-get update \
       && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
           && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
           && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
-      && apt install -q -y --no-install-recommends curl ca-certificates procps gnupg2 nodejs yarn libpq5 \
-      && echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' | tee /etc/apt/sources.list.d/bionic-security.list \
+      && apt install -q -y --no-install-recommends curl ca-certificates procps gnupg2 nodejs yarn libpq5 libpq-dev
+
+RUN curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - \
+      && curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - \
+      && apt update \
+      && curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,rails,ffi,nokogiri,puma,sqlite3,pg,json,eventmachine
+
+RUN echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' | tee /etc/apt/sources.list.d/bionic-security-main.list \
       && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 && apt update \
-      && apt-cache policy libssl1.0-dev && apt install -q -y --no-install-recommends libpq-dev libssl1.0-dev \
-      && sudo -u jenkins bash -c "curl -sSL https://rvm.io/mpapis.asc | gpg2 --no-tty --import -; curl -sSL https://rvm.io/pkuczynski.asc | gpg --no-tty --import -;" \
-      && sudo -u jenkins bash -c "\curl -sSL ${RVM_INSTALLER} | bash -s stable --ruby --gems=bundler,rails,ffi,nokogiri,puma,sqlite3,pg,json,eventmachine" \
-      && sudo -u jenkins bash -c 'source $HOME/.rvm/scripts/rvm && rvm requirements && rvm use 2.3.8 --default --install --fuzzy && rvm use 2.6 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm use 2.5 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm cleanup checksums repos logs gemsets links' \
+      && apt-cache policy libssl1.0-dev
+
+RUN sudo -u jenkins bash -c 'rvm requirements && rvm use 2.3.8 --default --install --fuzzy && rvm use 2.6 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm use 2.5 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm cleanup checksums repos logs gemsets links' \
       && apt autoremove -q -y \
       && rm -rf /var/lib/apt/lists/* \
       && rm -f /etc/sudoers.d/jenkins
