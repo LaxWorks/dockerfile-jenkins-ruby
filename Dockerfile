@@ -33,7 +33,7 @@ RUN echo 'deb http://security.ubuntu.com/ubuntu bionic-security main' | sudo tee
       && sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32 && sudo apt update \
       && sudo apt-cache policy libssl1.0-dev
 
-RUN bash -c 'rvm requirements && vm use 2.7 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm use 2.5 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm cleanup checksums repos logs gemsets links' \
+RUN bash -c 'source ~/.rvm/scripts/rvm && rvm requirements && vm use 2.7 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm use 2.5 --default --install --fuzzy && bundle install --gemfile=/tmp/Gemfile && rm -f /tmp/Gemfile.lock && rvm cleanup checksums repos logs gemsets links' \
       && sudo apt autoremove -q -y \
       && sudo rm -rf /var/lib/apt/lists/* \
       && sudo rm -f /etc/sudoers.d/jenkins
